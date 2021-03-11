@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GardeTonSmile{% endblock %}
+
+{% block body %}
+    <h1>{{ puraliser(publications|length, 'Publication', 'Publications') }}</h1>
+    {% for publication in publications %}
+        <article>
+        <h2>{{ publication.title }}</h2>
+        <p>{{ publication.description }}</p>
+        </article>
+    {% endfor %}
+{% endblock %}
