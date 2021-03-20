@@ -15,7 +15,7 @@ class PublicationsController extends AbstractController
      */
     public function index(PublicationRepository $publicationRepository): Response
     {
-        $publications = $publicationRepository->findAll();
+        $publications = $publicationRepository->findBy([], ['createdAt' => 'DESC']);
 
         return $this->render('publications/index.html.twig', compact('publications'));
     }
