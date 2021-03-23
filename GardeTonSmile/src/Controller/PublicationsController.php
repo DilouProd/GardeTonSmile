@@ -82,10 +82,14 @@ class PublicationsController extends AbstractController
      * @Route("/publication/{id<[0-9]+>}/supprimer", name="app_publication_delete", methods={"DELETE"})
      */
 
-    public function delete(Publication $publication, EntityManagerInterface $em): Response
+    public function delete(Request $request, Publication $publication, EntityManagerInterface $em): Response
     {
-        $em->remove($publication);
-        $em->flush();
+        
+        if ($this->isCsrfTokenValid('suppression_publication_' . $publication->getId(), $request->request->get('csrf_token'))) {
+            $em->remove($publication);
+            $em->flush();
+
+        }
         return $this->redirectToRoute('app_home');
     }
 }
