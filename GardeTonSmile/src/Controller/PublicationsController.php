@@ -3,13 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Publication;
+use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 class PublicationsController extends AbstractController
@@ -31,12 +30,7 @@ class PublicationsController extends AbstractController
     {
         $publication = new Publication;
 
-        $form = $this->createFormBuilder($publication)
-        ->add('title',TextType::class)
-        ->add('Description', TextareaType::class)
-        ->getForm()
-
-        ;
+        $form = $this->createForm(PublicationType::class, $publication);
         
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
@@ -62,17 +56,15 @@ class PublicationsController extends AbstractController
     }
 
     /**
-     * @Route("/publication/{id<[0-9]+>}/modifier", name="app_publication_edit", methods={"GET", "POST"})
+     * @Route("/publication/{id<[0-9]+>}/modifier", name="app_publication_edit", methods={"GET", "PUT"})
      */
 
     public function edit(Publication $publication,Request $request, EntityManagerInterface $em): Response
     {
-        $form = $this->createFormBuilder($publication)
-        ->add('title',TextType::class)
-        ->add('Description', TextareaType::class)
-        ->getForm()
+        $form = $this->createForm(PublicationType::class, $publication, [
+            'method' =>'PUT'
+        ]);
 
-        ;
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
