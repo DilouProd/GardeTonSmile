@@ -78,4 +78,14 @@ class PublicationsController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+        /**
+     * @Route("/publication/{id<[0-9]+>}/supprimer", name="app_publication_delete", methods={"DELETE"})
+     */
+
+    public function delete(Publication $publication, EntityManagerInterface $em): Response
+    {
+        $em->remove($publication);
+        $em->flush();
+        return $this->redirectToRoute('app_home');
+    }
 }
