@@ -6,7 +6,7 @@
     <h1>{{ puraliser(publications|length, 'Publication', 'Publications') }}</h1>
     {% for publication in publications %}
         <article>
-        <h2><a href="{{ path('app_publucations_show', {id:publication.id}) }}">{{ publication.title }}</a></h2>
+        <h2><a href="{{ path('app_publications_show', {id:publication.id}) }}">{{ publication.title }}</a></h2>
         <p>{{ publication.description }}</p>
         </article>
     {% endfor %}

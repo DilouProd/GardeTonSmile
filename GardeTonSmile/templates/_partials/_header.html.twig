@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ path('app_home') }}">Home</li>
+            <li><a href="{{ path('app_publication_create') }}">Nouvelle publication</li>
+        </ul>
+    </nav>
+</body>
+{% endblock %}

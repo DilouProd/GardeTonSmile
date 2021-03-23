@@ -7,6 +7,7 @@
 <article>
     <h1>{{publication.title}}</h1>
     <p>{{publication.description}}</p>
-    <a href="{{ path('app_home') }}">Go Back</a>
 </article>
+    <a href="{{ path('app_publication_edit', {id:publication.id}) }}">Edit</a> |
+    <a href="{{ path('app_home') }}">Go Back</a>
 {% endblock %}
