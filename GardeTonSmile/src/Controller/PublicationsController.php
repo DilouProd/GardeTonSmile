@@ -79,7 +79,7 @@ class PublicationsController extends AbstractController
         ]);
     }
         /**
-     * @Route("/publication/{id<[0-9]+>}/supprimer", name="app_publication_delete", methods={"DELETE"})
+     * @Route("/publication/{id<[0-9]+>}", name="app_publication_delete", methods={"DELETE"})
      */
 
     public function delete(Request $request, Publication $publication, EntityManagerInterface $em): Response
