@@ -11,7 +11,7 @@ class PublicationFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
-        for ($i = 1; $i <= 11; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             $p = new Publication();
             $p->setTitle('Publication '.$i);
             $p->setDescription('Description '.$i);
