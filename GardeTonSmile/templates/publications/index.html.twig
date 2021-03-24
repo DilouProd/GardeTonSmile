@@ -7,7 +7,8 @@
     {% for publication in publications %}
         <article>
         <h2><a href="{{ path('app_publications_show', {id:publication.id}) }}">{{ publication.title }}</a></h2>
-        <p>{{ publication.description }}</p>
+        <p>{{ publication.description|u.truncate(25, '...', false) }}</p>
+        <p>Ajouter le {{ publication.createdAt|ago }}</p>
         </article>
     {% endfor %}
 {% endblock %}
