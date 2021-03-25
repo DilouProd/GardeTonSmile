@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\Timestampable;
 use App\Repository\PublicationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PublicationRepository::class)
@@ -23,11 +24,15 @@ class Publication
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Il faut mettre un titre")
+     * @Assert\Length(min=3, minMessage="Le titre doit contenir au moins 3 caractères.")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Il faut mettre une description")
+     * @Assert\Length(min=10, minMessage="La description doit contenir au moins 10 caractères." )
      */
     private $description;
 
