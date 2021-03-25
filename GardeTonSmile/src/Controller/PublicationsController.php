@@ -37,6 +37,8 @@ class PublicationsController extends AbstractController
             $em->persist($publication);
             $em->flush();
 
+            $this->addFlash('success', 'Votre Publication a était créer avec succées!');
+
             return $this->redirectToRoute('app_home');
         }
 
@@ -70,6 +72,8 @@ class PublicationsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $em->flush();
 
+            $this->addFlash('success', 'Votre Publication a était modifier avec succées!');
+
             return $this->redirectToRoute('app_home');
 
         }
@@ -88,6 +92,8 @@ class PublicationsController extends AbstractController
         if ($this->isCsrfTokenValid('suppression_publication_' . $publication->getId(), $request->request->get('csrf_token'))) {
             $em->remove($publication);
             $em->flush();
+
+            $this->addFlash('info', 'Votre Publication a était supprimer avec succées!');
 
         }
         return $this->redirectToRoute('app_home');
