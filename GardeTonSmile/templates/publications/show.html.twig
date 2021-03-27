@@ -9,8 +9,7 @@
     <p>{{publication.description}}</p>
 </article>
     <a href="{{ path('app_publication_edit', {id:publication.id}) }}">Modifier</a> |
-    <a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûre de supprimer cette Publication ?') && document.getElementById('js-publication-delete-form').submit();">Supprimer</a> |
-    <a href="{{ path('app_home') }}">Retour Acceil</a>
+    <a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûre de supprimer cette Publication ?') && document.getElementById('js-publication-delete-form').submit();">Supprimer</a>
 
    <form id = "js-publication-delete-form"action="{{ path('app_publication_delete', {id:publication.id}) }}" method="post" style="display:none;">
         <input type="hidden" name="csrf_token" value="{{ csrf_token('suppression_publication_' ~ publication.id)}}">
