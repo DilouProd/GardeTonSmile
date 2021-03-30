@@ -18,6 +18,7 @@ class PublicationType extends AbstractType
             'required' => false,
             'allow_delete' => false,
             'asset_helper' => true,
+            'imagine_pattern' => 'squared_thumbail_small',
         ])
         ->add('title')
         ->add('description')

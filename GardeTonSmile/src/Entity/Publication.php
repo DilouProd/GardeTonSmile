@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 /**
  * @ORM\Entity(repositoryClass=PublicationRepository::class)
@@ -43,7 +44,7 @@ class Publication
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="publication_image", fileNameProperty="imageName")
-     * @Assert\Image(maxSize="8M")
+     * @Assert\Image(maxSize="8M", maxSizeMessage="toto")
      * 
      * @var File|null
      */
