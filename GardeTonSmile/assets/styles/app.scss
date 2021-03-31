@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import'shared/_variables';
-@import "bootstrap/scss/bootstrap";
+@import "bootstrap";
 
 body {
     font-family: $primary-font, sans-serif;
+}
+
+.nav-2 {
+    margin-left: auto;
 }
 
 .alert {
@@ -27,18 +31,16 @@ body {
     }
 }
 
-.alert-success {
-    background-color: green;
+.vich-image {
+    .form-check {
+        @extend .mt-3;
+    }
+
+    img {
+        @extend .mb-2;
+        @extend .rounded;
+        @extend .shadow;
+        @extend .img-thumbnail;
+    }
 }
 
-.alert-error {
-    background-color: red;
-}
-
-.alert-info {
-    background-color: blue;
-}
-
-.nav-2 {
-    margin-left: auto;
-}
