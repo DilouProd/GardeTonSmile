@@ -3,16 +3,30 @@
 {% block title publication.title %}
 
 {% block body %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <article class="publication bg-white rounded shadow">
+            <div class="mw-100 overflow-hidden">
+                <a href="{{ path('app_publications_show', {id: publication.id}) }}">
+                    <img src="{{ (publication.imageName ? vich_uploader_asset(publication) : asset('build/images/train.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ publication.title }}" class="w-100 rounded-top" />
+                </a>
+            </div>
+            <h2 class="h5 pl-3 pt-3"><a href="{{ path('app_publications_show', {id:publication.id}) }}" class="text-secondary text-decoration-none">{{ publication.title }}</a></h2>
+            <p class="pl-3 pb-3 text-muted"><small>Ajouter le <time datetime="{{ publication.createdAt|date('Y-m-d H:i:s') }}">{{ publication.createdAt|ago }}</time> par [OWNER FULL NAME]</small></p>
 
-<article>
-    <h1>{{publication.title}}</h1>
-    <p>{{publication.description}}</p>
-</article>
-    <a href="{{ path('app_publication_edit', {id:publication.id}) }}">Modifier</a> |
-    <a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûre de supprimer cette Publication ?') && document.getElementById('js-publication-delete-form').submit();">Supprimer</a>
+            <p class="pl-3 pb-3">{{publication.description}} </p>
 
-   <form id = "js-publication-delete-form"action="{{ path('app_publication_delete', {id:publication.id}) }}" method="post" style="display:none;">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token('suppression_publication_' ~ publication.id)}}">
-        <input type="hidden" name="_method" value="DELETE">
-    </form>
+            <div class="pl-3 pb-3">
+            <a href="{{ path('app_publication_edit', {id:publication.id}) }}" class="btn btn-light">Modifier</a>
+            <a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûre de supprimer cette Publication ?') && document.getElementById('js-publication-delete-form').submit();" class="btn btn-light">Supprimer</a>
+
+        <form id = "js-publication-delete-form"action="{{ path('app_publication_delete', {id:publication.id}) }}" method="post" style="display:none;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token('suppression_publication_' ~ publication.id)}}">
+                <input type="hidden" name="_method" value="DELETE">
+        </form>
+            </div>
+        </article>
+            
+    </div>
+</div>
 {% endblock %}
