@@ -19,7 +19,7 @@ class PublicationType extends AbstractType
             'allow_delete' => false,
             'asset_helper' => true,
             'allow_delete' => true,
-            'imagine_pattern' => 'squared_thumbail_small',
+            'imagine_pattern' => 'squared_thumbnail_small',
         ])
         ->add('title')
         ->add('description')

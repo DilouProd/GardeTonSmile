@@ -3,12 +3,28 @@
 {% block title %}GardeTonSmile{% endblock %}
 
 {% block body %}
-    <h1>{{ puraliser(publications|length, 'Publication', 'Publications') }}</h1>
-    {% for publication in publications %}
-        <article>
-        <h2><a href="{{ path('app_publications_show', {id:publication.id}) }}">{{ publication.title }}</a></h2>
-        <p>{{ publication.description|u.truncate(25, '...', false) }}</p>
-        <p>Ajouter le {{ publication.createdAt|ago }}</p>
-        </article>
-    {% endfor %}
+    {% if publications|length > 0 %}
+        <h1 class="mb-4 text-center text-muted">{{ puraliser(publications|length, 'Publication', 'Publications') }}</h1>
+
+            {% for row in publications|batch(3) %}
+                <div class="row mb-5">
+                    {% for publication in row %}
+                    <div class="col-md-4">
+                        <article class="publication bg-white rounded shadow">
+                        <div class="mw-100 overflow-hidden">
+                                <a href="{{ path('app_publications_show', {id: publication.id}) }}">
+                                    <img src="{{ (publication.imageName ? vich_uploader_asset(publication) : asset('build/images/train.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ publication.title }}" class="w-100 rounded-top" />
+                                </a>
+                            </div>
+                            <h2 class="h5 pl-3 pt-3"><a href="{{ path('app_publications_show', {id:publication.id}) }}" class="text-secondary text-decoration-none">{{ publication.title }}</a></h2>
+                            <p class="pl-3 pb-3 text-muted"><small>Ajouter par [OWNER FULL NAME]</small></p>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            {% else %}
+        <p class="mt-5 h1 text-center">Aucune Publication.<a href="{{path('app_publication_create') }}"> Soit le premier!</a>
+        </p>
+    {% endif %}
 {% endblock %}
