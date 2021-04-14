@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Publication;
 use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,14 +27,17 @@ class PublicationsController extends AbstractController
     /**
      * @Route("/publication/create", name="app_publication_create", methods={"GET", "POST"})
      */
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em, UserRepository $userRepo): Response
     {
         $publication = new Publication;
 
         $form = $this->createForm(PublicationType::class, $publication);
         
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()){
+            $janeDoe = $userRepo->findOneBy(['email' => 'janedoe@example.com']);
+            $publication->setUser($janeDoe);
             $em->persist($publication);
             $em->flush();
 
