@@ -36,8 +36,7 @@ class PublicationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $janeDoe = $userRepo->findOneBy(['email' => 'janedoe@example.com']);
-            $publication->setUser($janeDoe);
+            $publication->setUser($this->getUser());
             $em->persist($publication);
             $em->flush();
 
