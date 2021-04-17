@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-6 mx-auto">
             
-            <h1 class="mt-5 mb-3 text-center">Please sign in</h1>
+            <h1 class="mt-5 mb-3 text-center">Connecte-toi</h1>
             <p class="mb-4 text-center text-muted">Vos publications n'attend plus que toi</p>
 
             <form method="post">
@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="form-gorup">
-                    <label for="password">Password</label>
+                    <label for="password">Mot de passe</label>
                     <input type="password" name="password" id="password" class="form-control" required>
                 </div>
                 
@@ -42,7 +42,7 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                 <button class="btn btn-lg btn-block btn-primary" type="submit">
-                Sign in
+                Connecte-toi ici
                 </button>
                 <p class="mt-5 mb-3 text-center text-muted">Pas de compte ? <a href="{{ path('app_register') }}">Créer un compte</a></p>
             </form>

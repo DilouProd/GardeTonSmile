@@ -3,25 +3,41 @@
 {% block title 'Inscription' %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-error rounded mb-3" role="alert">{{ flashError }}</div>
-    {% endfor %}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            {% for flashError in app.flashes('verify_email_error') %}
+                <div class="alert alert-error rounded mb-3" role="alert">{{ flashError }}</div>
+            {% endfor %}
 
-    <h1>Register</h1>
+            <h1 class="my-5 text-center">Inscrit-toi</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstName, {
-            label: 'Prénom'
-        }) }}
-        {{ form_row(registrationForm.lastName, {
-            label: 'Nom de famille'
-        }) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, { 
-            label: 'Mot de passe'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_start(registrationForm) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(registrationForm.firstName, {
+                            label: 'Prénom'
+                        }) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(registrationForm.lastName, {
+                            label: 'Nom de famille'
+                        }) }}
+                    </div>
+                </div>
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword, { 
+                    label: 'Mot de passe'
+                }) }}
+                {{ form_row(registrationForm.agreeTerms, {
+                    label: 'J\'accepte les Conditions d\'utilisation, la Politique de confidentialité'
+                }) }}
 
-        <button type="submit" class="btn btn-primary">Register</button>
-    {{ form_end(registrationForm) }}
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Inscrit-toi</button>
+            {{ form_end(registrationForm) }}
+
+            <p class="mt-5 mb-3 text-center text-muted">
+                Tu as déjà un compte ? Connecte-toi <a href="{{ path('app_login') }}">ici</a>
+            </p>
+        </div>
+    </div>
 {% endblock %}
