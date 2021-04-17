@@ -25,7 +25,7 @@ class PublicationsController extends AbstractController
     }
 
     /**
-     * @Route("/publication/create", name="app_publication_create", methods={"GET", "POST"})
+     * @Route("/publication/    create", name="app_publication_create", methods={"GET", "POST"})
      */
     public function create(Request $request, EntityManagerInterface $em, UserRepository $userRepo): Response
     {
