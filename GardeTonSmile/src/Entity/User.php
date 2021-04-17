@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -28,16 +29,20 @@ class User implements UserInterface
     
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez mettre votre Prénom s'il vous plaît.")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez mettre votre Nom de famille s'il vous plaît.")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank(message="Veuillez mettre votre Adresse email s'il vous plaît.")
+     * @Assert\Email(message="Veuillez mettre une Adresse email valide s'il vous plaît.")
      */
     private $email;
 
