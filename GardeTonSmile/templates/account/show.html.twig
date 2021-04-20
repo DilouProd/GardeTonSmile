@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 mx-auto text-center">
+            <h1 class="mt-5 mb-3">Profil</h1>
+
+            <img src="{{ app.user.gravatar }}" alt="{{ app.user.fullName }} avatar" class="shadow rounded-circle">
+
+            <p class="lead mt-4">{{ app.user.email }}</p>
+
+            <h2>{{ app.user.fullName }}</h>
+
+            <p class="h5 mt-2">
+                <a href="">Modifier mon compte</a> | <a href="">Changer de mot de passe</a>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}
