@@ -11,10 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * @Route("/compte")
+ */
 class AccountController extends AbstractController
 {
     /**
-     * @Route("/compte", name="app_account", methods={"GET"})
+     * @Route("", name="app_account", methods={"GET"})
      */
     public function show(): Response
     {
@@ -22,7 +25,7 @@ class AccountController extends AbstractController
     }
     
     /**
-     * @Route("/compte/modifier", name="app_account_edit", methods={"GET", "POST"})
+     * @Route("/modifier", name="app_account_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, EntityManagerInterface $em): Response
     {
@@ -46,13 +49,15 @@ class AccountController extends AbstractController
         }
 
         /**
-         * @Route("/compte/changer-de-mot-de-passe", name="app_account_change_password", methods={"GET", "POST"})
+         * @Route("/changer-de-mot-de-passe", name="app_account_change_password", methods={"GET", "POST"})
          */
         public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder): Response
         {
             $user = $this->getUser();
 
-            $form = $this->createForm(ChangePasswordFormType::class);
+            $form = $this->createForm(ChangePasswordFormType::class, null, [
+                'current_password_is_required' => true
+            ]);
 
             $form->handleRequest($request);
             
@@ -63,9 +68,9 @@ class AccountController extends AbstractController
 
                 $em->flush();
 
-                $this->addFlash('success', 'Mot de passe changer avec succès')
+                $this->addFlash('success', 'Mot de passe changer avec succès');
 
-                $this->redirectToRoute('app_account');
+                return $this->redirectToRoute('app_account');
             }
             
             return $this->render('account/change_password.html.twig', [
