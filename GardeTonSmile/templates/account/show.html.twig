@@ -7,12 +7,11 @@
         <div class="col-md-6 mx-auto text-center">
             <h1 class="mt-5 mb-3">Profil</h1>
 
-            <img src="{{ app.user.gravatar }}" alt="{{ app.user.fullName }} avatar" class="shadow rounded-circle">
+            <img src="{{ app.user.gravatarUrl }}" alt="{{ app.user.fullName }} avatar" class="shadow rounded-circle">
 
             <p class="lead mt-4">{{ app.user.email }}</p>
-            <p><small>Compte créer le {{ app.user.createdAt|date('d/m/Y') }}</small></p>
-
-            <h2>{{ app.user.fullName }}</h>
+            <h2>{{ app.user.fullName }}</h2>
+            <p class=""><small>Compte créer le {{ app.user.createdAt|date('d/m/Y') }}</small></p>
 
             <p class="h5 mt-2">
                 <a href="{{ path('app_account_edit') }}">Modifier mon compte</a> | 
