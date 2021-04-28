@@ -23,7 +23,9 @@ class PublicationType extends AbstractType
             'allow_delete' => true,
             'imagine_pattern' => 'squared_thumbnail_small',
         ])
-        ->add('title', TextType::class)
+        ->add('title', TextType::class, [
+            'label' => 'Titre',
+        ])
         ->add('description', TextareaType::class)
         ;
     }
