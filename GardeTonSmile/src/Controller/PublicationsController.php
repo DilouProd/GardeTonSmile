@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Publication;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
 use App\Repository\UserRepository;
@@ -25,7 +26,8 @@ class PublicationsController extends AbstractController
     }
 
     /**
-     * @Route("/publication/    create", name="app_publication_create", methods={"GET", "POST"})
+     * @Route("/publication/create", name="app_publication_create", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_USER') and user.isVerified()")
      */
     public function create(Request $request, EntityManagerInterface $em, UserRepository $userRepo): Response
     {
@@ -53,6 +55,7 @@ class PublicationsController extends AbstractController
     }
     /**
      * @Route("/publication/{id<[0-9]+>}", name="app_publications_show", methods="GET")
+     * 
      */
 
     public function show(Publication $publication): Response
@@ -62,10 +65,24 @@ class PublicationsController extends AbstractController
 
     /**
      * @Route("/publication/{id<[0-9]+>}/modifier", name="app_publication_edit", methods={"GET", "PUT"})
+     * @Security("is_granted('PUBLICATION_MANAGE', publication)")
      */
 
     public function edit(Publication $publication,Request $request, EntityManagerInterface $em): Response
     {
+        // if(! $this->getUser()){
+        //     $this->addFlash('error', 'Tu dois d\'abord etre connecter !');
+        //     return $this->redirectToRoute('app_login');
+        // }
+        // if(! $this->getUser()->isVerified()){
+        //     $this->addFlash('error', 'Tu dois d\'abord valider ton adresse email !');
+        //     return $this->redirectToRoute('app_home');
+        // }
+        // if($publication->getUser() != $this->getUser()){
+        //     $this->addFlash('error', 'Accès interdit !');
+        //     return $this->redirectToRoute('app_home');
+        // }
+
         $form = $this->createForm(PublicationType::class, $publication, [
             'method' =>'PUT'
         ]);
@@ -85,13 +102,13 @@ class PublicationsController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-        /**
+    /**
      * @Route("/publication/{id<[0-9]+>}", name="app_publication_delete", methods={"DELETE"})
+     *@Security("is_granted('PUBLICATION_MANAGE', publication)")     
      */
 
     public function delete(Request $request, Publication $publication, EntityManagerInterface $em): Response
     {
-        
         if ($this->isCsrfTokenValid('suppression_publication_' . $publication->getId(), $request->request->get('csrf_token'))) {
             $em->remove($publication);
             $em->flush();

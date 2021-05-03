@@ -15,8 +15,8 @@
                 <p class="text-muted"><small>Ajouter il y a <time datetime="{{ publication.createdAt|date('Y-m-d H:i:s') }}">{{ publication.createdAt|ago }}</time> par {{publication.user.fullName}}</small></p>
 
                 <p class="pt-3 text-break">{{publication.description}}</p>
-
-                <div class="pt-3">
+            {% if app.user == publication.user %}
+            <div class="pt-3">
                 <a href="{{ path('app_publication_edit', {id:publication.id}) }}" class="btn btn-light">Modifier</a>
                 <a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûre de supprimer cette Publication ?') && document.getElementById('js-publication-delete-form').submit();" class="btn btn-light">Supprimer</a>
 
@@ -25,7 +25,7 @@
                     <input type="hidden" name="_method" value="DELETE">
                 </form>
             </div>
-            
+            {% endif %}
             </div>
         </article>
             
